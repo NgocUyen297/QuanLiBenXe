@@ -5,8 +5,8 @@
 package com.uav.pojo;
 
 import java.io.Serializable;
+import java.util.Collection;
 import java.util.Date;
-import java.util.Set;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -97,12 +97,12 @@ public class Users implements Serializable {
     @NotNull
     @Column(name = "SDT")
     private int sdt;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "userId")
-    private Set<Ticket> ticketSet;
+    @OneToMany(mappedBy = "userId")
+    private Collection<Ticket> ticketCollection;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "driverID")
-    private Set<Buses> busesSet;
+    private Collection<Buses> busesCollection;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "staffconfirm")
-    private Set<Busesstatus> busesstatusSet;
+    private Collection<Busesstatus> busesstatusCollection;
 
     public Users() {
     }
@@ -205,30 +205,30 @@ public class Users implements Serializable {
     }
 
     @XmlTransient
-    public Set<Ticket> getTicketSet() {
-        return ticketSet;
+    public Collection<Ticket> getTicketCollection() {
+        return ticketCollection;
     }
 
-    public void setTicketSet(Set<Ticket> ticketSet) {
-        this.ticketSet = ticketSet;
-    }
-
-    @XmlTransient
-    public Set<Buses> getBusesSet() {
-        return busesSet;
-    }
-
-    public void setBusesSet(Set<Buses> busesSet) {
-        this.busesSet = busesSet;
+    public void setTicketCollection(Collection<Ticket> ticketCollection) {
+        this.ticketCollection = ticketCollection;
     }
 
     @XmlTransient
-    public Set<Busesstatus> getBusesstatusSet() {
-        return busesstatusSet;
+    public Collection<Buses> getBusesCollection() {
+        return busesCollection;
     }
 
-    public void setBusesstatusSet(Set<Busesstatus> busesstatusSet) {
-        this.busesstatusSet = busesstatusSet;
+    public void setBusesCollection(Collection<Buses> busesCollection) {
+        this.busesCollection = busesCollection;
+    }
+
+    @XmlTransient
+    public Collection<Busesstatus> getBusesstatusCollection() {
+        return busesstatusCollection;
+    }
+
+    public void setBusesstatusCollection(Collection<Busesstatus> busesstatusCollection) {
+        this.busesstatusCollection = busesstatusCollection;
     }
 
     @Override

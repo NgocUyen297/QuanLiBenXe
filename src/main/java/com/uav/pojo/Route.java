@@ -5,8 +5,8 @@
 package com.uav.pojo;
 
 import java.io.Serializable;
+import java.util.Collection;
 import java.util.Date;
-import java.util.Set;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -64,7 +64,7 @@ public class Route implements Serializable {
     @Column(name = "image")
     private String image;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "routeId")
-    private Set<Routestation> routestationSet;
+    private Collection<Routestation> routestationCollection;
     @JoinColumn(name = "destination", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private Province destination;
@@ -72,7 +72,7 @@ public class Route implements Serializable {
     @ManyToOne(optional = false)
     private Province startingpoint;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "routeId")
-    private Set<Routebuses> routebusesSet;
+    private Collection<Routebuses> routebusesCollection;
 
     public Route() {
     }
@@ -121,12 +121,12 @@ public class Route implements Serializable {
     }
 
     @XmlTransient
-    public Set<Routestation> getRoutestationSet() {
-        return routestationSet;
+    public Collection<Routestation> getRoutestationCollection() {
+        return routestationCollection;
     }
 
-    public void setRoutestationSet(Set<Routestation> routestationSet) {
-        this.routestationSet = routestationSet;
+    public void setRoutestationCollection(Collection<Routestation> routestationCollection) {
+        this.routestationCollection = routestationCollection;
     }
 
     public Province getDestination() {
@@ -146,12 +146,12 @@ public class Route implements Serializable {
     }
 
     @XmlTransient
-    public Set<Routebuses> getRoutebusesSet() {
-        return routebusesSet;
+    public Collection<Routebuses> getRoutebusesCollection() {
+        return routebusesCollection;
     }
 
-    public void setRoutebusesSet(Set<Routebuses> routebusesSet) {
-        this.routebusesSet = routebusesSet;
+    public void setRoutebusesCollection(Collection<Routebuses> routebusesCollection) {
+        this.routebusesCollection = routebusesCollection;
     }
 
     @Override

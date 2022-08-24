@@ -18,4 +18,5 @@ public interface BusesService {
     int countBuses();
     boolean deleteBuses(int id);
     boolean addBuses(Buses p);
+    Buses getBusById(int busId);
 }

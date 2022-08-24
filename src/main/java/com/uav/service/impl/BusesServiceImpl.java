@@ -44,4 +44,9 @@ public class BusesServiceImpl implements BusesService {
 
     }
 
+    @Override
+    public Buses getBusById(int busId) {
+        return this.busesRepository.getBusById(busId);
+    }
+
 }

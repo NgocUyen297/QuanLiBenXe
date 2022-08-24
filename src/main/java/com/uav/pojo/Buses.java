@@ -5,7 +5,7 @@
 package com.uav.pojo;
 
 import java.io.Serializable;
-import java.util.Set;
+import java.util.Collection;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -33,7 +33,7 @@ import javax.xml.bind.annotation.XmlTransient;
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Buses.findAll", query = "SELECT b FROM Buses b"),
-    @NamedQuery(name = "Buses.findByBId", query = "SELECT b FROM Buses b WHERE b.bId = :bId"),
+    @NamedQuery(name = "Buses.findByBid", query = "SELECT b FROM Buses b WHERE b.bid = :bid"),
     @NamedQuery(name = "Buses.findByBusesName", query = "SELECT b FROM Buses b WHERE b.busesName = :busesName"),
     @NamedQuery(name = "Buses.findByBstatus", query = "SELECT b FROM Buses b WHERE b.bstatus = :bstatus"),
     @NamedQuery(name = "Buses.findByImage", query = "SELECT b FROM Buses b WHERE b.image = :image")})
@@ -43,8 +43,8 @@ public class Buses implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "bId")
-    private Integer bId;
+    @Column(name = "bid")
+    private Integer bid;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 64)
@@ -57,8 +57,8 @@ public class Buses implements Serializable {
     @Size(max = 500)
     @Column(name = "image")
     private String image;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "busesId")
-    private Set<Ticket> ticketSet;
+    @OneToMany(mappedBy = "busesId")
+    private Collection<Ticket> ticketCollection;
     @JoinColumn(name = "driverID", referencedColumnName = "userid")
     @ManyToOne(optional = false)
     private Users driverID;
@@ -66,29 +66,29 @@ public class Buses implements Serializable {
     @ManyToOne(optional = false)
     private Plxe loaixeID;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "busesId")
-    private Set<Routebuses> routebusesSet;
+    private Collection<Routebuses> routebusesCollection;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "busesId")
-    private Set<Busesstatus> busesstatusSet;
+    private Collection<Busesstatus> busesstatusCollection;
 
     public Buses() {
     }
 
-    public Buses(Integer bId) {
-        this.bId = bId;
+    public Buses(Integer bid) {
+        this.bid = bid;
     }
 
-    public Buses(Integer bId, String busesName, boolean bstatus) {
-        this.bId = bId;
+    public Buses(Integer bid, String busesName, boolean bstatus) {
+        this.bid = bid;
         this.busesName = busesName;
         this.bstatus = bstatus;
     }
 
-    public Integer getBId() {
-        return bId;
+    public Integer getBid() {
+        return bid;
     }
 
-    public void setBId(Integer bId) {
-        this.bId = bId;
+    public void setBid(Integer bid) {
+        this.bid = bid;
     }
 
     public String getBusesName() {
@@ -116,12 +116,12 @@ public class Buses implements Serializable {
     }
 
     @XmlTransient
-    public Set<Ticket> getTicketSet() {
-        return ticketSet;
+    public Collection<Ticket> getTicketCollection() {
+        return ticketCollection;
     }
 
-    public void setTicketSet(Set<Ticket> ticketSet) {
-        this.ticketSet = ticketSet;
+    public void setTicketCollection(Collection<Ticket> ticketCollection) {
+        this.ticketCollection = ticketCollection;
     }
 
     public Users getDriverID() {
@@ -141,27 +141,27 @@ public class Buses implements Serializable {
     }
 
     @XmlTransient
-    public Set<Routebuses> getRoutebusesSet() {
-        return routebusesSet;
+    public Collection<Routebuses> getRoutebusesCollection() {
+        return routebusesCollection;
     }
 
-    public void setRoutebusesSet(Set<Routebuses> routebusesSet) {
-        this.routebusesSet = routebusesSet;
+    public void setRoutebusesCollection(Collection<Routebuses> routebusesCollection) {
+        this.routebusesCollection = routebusesCollection;
     }
 
     @XmlTransient
-    public Set<Busesstatus> getBusesstatusSet() {
-        return busesstatusSet;
+    public Collection<Busesstatus> getBusesstatusCollection() {
+        return busesstatusCollection;
     }
 
-    public void setBusesstatusSet(Set<Busesstatus> busesstatusSet) {
-        this.busesstatusSet = busesstatusSet;
+    public void setBusesstatusCollection(Collection<Busesstatus> busesstatusCollection) {
+        this.busesstatusCollection = busesstatusCollection;
     }
 
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (bId != null ? bId.hashCode() : 0);
+        hash += (bid != null ? bid.hashCode() : 0);
         return hash;
     }
 
@@ -172,7 +172,7 @@ public class Buses implements Serializable {
             return false;
         }
         Buses other = (Buses) object;
-        if ((this.bId == null && other.bId != null) || (this.bId != null && !this.bId.equals(other.bId))) {
+        if ((this.bid == null && other.bid != null) || (this.bid != null && !this.bid.equals(other.bid))) {
             return false;
         }
         return true;
@@ -180,7 +180,7 @@ public class Buses implements Serializable {
 
     @Override
     public String toString() {
-        return "com.uav.pojo.Buses[ bId=" + bId + " ]";
+        return "com.uav.pojo.Buses[ bid=" + bid + " ]";
     }
     
 }

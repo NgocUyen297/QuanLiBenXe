@@ -41,7 +41,7 @@ public class Routestation implements Serializable {
     @JoinColumn(name = "route_id", referencedColumnName = "rid")
     @ManyToOne(optional = false)
     private Route routeId;
-    @JoinColumn(name = "idTram", referencedColumnName = "idTram")
+    @JoinColumn(name = "idTram", referencedColumnName = "idtram")
     @ManyToOne(optional = false)
     private Tram idTram;
 

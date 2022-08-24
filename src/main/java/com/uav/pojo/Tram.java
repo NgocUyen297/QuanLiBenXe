@@ -5,7 +5,7 @@
 package com.uav.pojo;
 
 import java.io.Serializable;
-import java.util.Set;
+import java.util.Collection;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -31,7 +31,7 @@ import javax.xml.bind.annotation.XmlTransient;
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Tram.findAll", query = "SELECT t FROM Tram t"),
-    @NamedQuery(name = "Tram.findByIdTram", query = "SELECT t FROM Tram t WHERE t.idTram = :idTram"),
+    @NamedQuery(name = "Tram.findByIdtram", query = "SELECT t FROM Tram t WHERE t.idtram = :idtram"),
     @NamedQuery(name = "Tram.findByTenTram", query = "SELECT t FROM Tram t WHERE t.tenTram = :tenTram")})
 public class Tram implements Serializable {
 
@@ -39,15 +39,15 @@ public class Tram implements Serializable {
     @Id
     @Basic(optional = false)
     @NotNull
-    @Column(name = "idTram")
-    private Integer idTram;
+    @Column(name = "idtram")
+    private Integer idtram;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 45)
     @Column(name = "tenTram")
     private String tenTram;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idTram")
-    private Set<Routestation> routestationSet;
+    private Collection<Routestation> routestationCollection;
     @JoinColumn(name = "districtid", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private District districtid;
@@ -61,21 +61,21 @@ public class Tram implements Serializable {
     public Tram() {
     }
 
-    public Tram(Integer idTram) {
-        this.idTram = idTram;
+    public Tram(Integer idtram) {
+        this.idtram = idtram;
     }
 
-    public Tram(Integer idTram, String tenTram) {
-        this.idTram = idTram;
+    public Tram(Integer idtram, String tenTram) {
+        this.idtram = idtram;
         this.tenTram = tenTram;
     }
 
-    public Integer getIdTram() {
-        return idTram;
+    public Integer getIdtram() {
+        return idtram;
     }
 
-    public void setIdTram(Integer idTram) {
-        this.idTram = idTram;
+    public void setIdtram(Integer idtram) {
+        this.idtram = idtram;
     }
 
     public String getTenTram() {
@@ -87,12 +87,12 @@ public class Tram implements Serializable {
     }
 
     @XmlTransient
-    public Set<Routestation> getRoutestationSet() {
-        return routestationSet;
+    public Collection<Routestation> getRoutestationCollection() {
+        return routestationCollection;
     }
 
-    public void setRoutestationSet(Set<Routestation> routestationSet) {
-        this.routestationSet = routestationSet;
+    public void setRoutestationCollection(Collection<Routestation> routestationCollection) {
+        this.routestationCollection = routestationCollection;
     }
 
     public District getDistrictid() {
@@ -122,7 +122,7 @@ public class Tram implements Serializable {
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (idTram != null ? idTram.hashCode() : 0);
+        hash += (idtram != null ? idtram.hashCode() : 0);
         return hash;
     }
 
@@ -133,7 +133,7 @@ public class Tram implements Serializable {
             return false;
         }
         Tram other = (Tram) object;
-        if ((this.idTram == null && other.idTram != null) || (this.idTram != null && !this.idTram.equals(other.idTram))) {
+        if ((this.idtram == null && other.idtram != null) || (this.idtram != null && !this.idtram.equals(other.idtram))) {
             return false;
         }
         return true;
@@ -141,7 +141,7 @@ public class Tram implements Serializable {
 
     @Override
     public String toString() {
-        return "com.uav.pojo.Tram[ idTram=" + idTram + " ]";
+        return "com.uav.pojo.Tram[ idtram=" + idtram + " ]";
     }
     
 }

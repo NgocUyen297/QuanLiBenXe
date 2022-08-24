@@ -5,7 +5,7 @@
 package com.uav.pojo;
 
 import java.io.Serializable;
-import java.util.Set;
+import java.util.Collection;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -18,7 +18,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -50,17 +49,13 @@ public class District implements Serializable {
     @Size(max = 20)
     @Column(name = "_prefix")
     private String prefix;
-    @OneToOne(cascade = CascadeType.ALL, mappedBy = "pupDistrict")
-    private Ticket ticket;
-    @OneToOne(cascade = CascadeType.ALL, mappedBy = "dDistrict")
-    private Ticket ticket1;
     @JoinColumn(name = "_province_id", referencedColumnName = "id")
     @ManyToOne
     private Province provinceId;
     @OneToMany(mappedBy = "districtId")
-    private Set<Ward> wardSet;
+    private Collection<Ward> wardCollection;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "districtid")
-    private Set<Tram> tramSet;
+    private Collection<Tram> tramCollection;
 
     public District() {
     }
@@ -93,22 +88,6 @@ public class District implements Serializable {
         this.prefix = prefix;
     }
 
-    public Ticket getTicket() {
-        return ticket;
-    }
-
-    public void setTicket(Ticket ticket) {
-        this.ticket = ticket;
-    }
-
-    public Ticket getTicket1() {
-        return ticket1;
-    }
-
-    public void setTicket1(Ticket ticket1) {
-        this.ticket1 = ticket1;
-    }
-
     public Province getProvinceId() {
         return provinceId;
     }
@@ -118,21 +97,21 @@ public class District implements Serializable {
     }
 
     @XmlTransient
-    public Set<Ward> getWardSet() {
-        return wardSet;
+    public Collection<Ward> getWardCollection() {
+        return wardCollection;
     }
 
-    public void setWardSet(Set<Ward> wardSet) {
-        this.wardSet = wardSet;
+    public void setWardCollection(Collection<Ward> wardCollection) {
+        this.wardCollection = wardCollection;
     }
 
     @XmlTransient
-    public Set<Tram> getTramSet() {
-        return tramSet;
+    public Collection<Tram> getTramCollection() {
+        return tramCollection;
     }
 
-    public void setTramSet(Set<Tram> tramSet) {
-        this.tramSet = tramSet;
+    public void setTramCollection(Collection<Tram> tramCollection) {
+        this.tramCollection = tramCollection;
     }
 
     @Override

@@ -5,7 +5,7 @@
 package com.uav.pojo;
 
 import java.io.Serializable;
-import java.util.Set;
+import java.util.Collection;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -18,7 +18,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -56,15 +55,11 @@ public class Ward implements Serializable {
     private String prefix;
     @Column(name = "_province_id")
     private Integer provinceId;
-    @OneToOne(cascade = CascadeType.ALL, mappedBy = "pupWard")
-    private Ticket ticket;
-    @OneToOne(cascade = CascadeType.ALL, mappedBy = "dWard")
-    private Ticket ticket1;
     @JoinColumn(name = "_district_id", referencedColumnName = "id")
     @ManyToOne
     private District districtId;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "wardId")
-    private Set<Tram> tramSet;
+    private Collection<Tram> tramCollection;
 
     public Ward() {
     }
@@ -110,22 +105,6 @@ public class Ward implements Serializable {
         this.provinceId = provinceId;
     }
 
-    public Ticket getTicket() {
-        return ticket;
-    }
-
-    public void setTicket(Ticket ticket) {
-        this.ticket = ticket;
-    }
-
-    public Ticket getTicket1() {
-        return ticket1;
-    }
-
-    public void setTicket1(Ticket ticket1) {
-        this.ticket1 = ticket1;
-    }
-
     public District getDistrictId() {
         return districtId;
     }
@@ -135,12 +114,12 @@ public class Ward implements Serializable {
     }
 
     @XmlTransient
-    public Set<Tram> getTramSet() {
-        return tramSet;
+    public Collection<Tram> getTramCollection() {
+        return tramCollection;
     }
 
-    public void setTramSet(Set<Tram> tramSet) {
-        this.tramSet = tramSet;
+    public void setTramCollection(Collection<Tram> tramCollection) {
+        this.tramCollection = tramCollection;
     }
 
     @Override

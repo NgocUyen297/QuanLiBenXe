@@ -46,7 +46,7 @@ public class Busesstatus implements Serializable {
     @Column(name = "leavingtime")
     @Temporal(TemporalType.TIMESTAMP)
     private Date leavingtime;
-    @JoinColumn(name = "busesId", referencedColumnName = "bId")
+    @JoinColumn(name = "busesId", referencedColumnName = "bid")
     @ManyToOne(optional = false)
     private Buses busesId;
     @JoinColumn(name = "staffconfirm", referencedColumnName = "userid")

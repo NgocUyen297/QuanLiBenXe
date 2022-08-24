@@ -5,7 +5,6 @@
 package com.uav.repository.impl;
 
 import com.uav.pojo.Buses;
-import com.uav.pojo.Route;
 import com.uav.repository.BusesRepository;
 import java.util.ArrayList;
 import java.util.List;
@@ -79,7 +78,7 @@ public class BusesRepositoryImpl implements BusesRepository {
 
         }
 
-        q.orderBy(b.desc(root.get("bId")), b.desc(root.get("busesName")));
+        q.orderBy(b.desc(root.get("bid")), b.desc(root.get("busesName")));
 
         Query query = session.createQuery(q);
 
@@ -129,6 +128,12 @@ public class BusesRepositoryImpl implements BusesRepository {
             ex.printStackTrace();
             return false;
         }
+    }
+
+    @Override
+    public Buses getBusById(int busId) {
+        Session session = this.sessionFactory.getObject().getCurrentSession();
+        return session.get(Buses.class, busId);
     }
 
 }

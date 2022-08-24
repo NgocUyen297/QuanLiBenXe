@@ -28,4 +28,9 @@ Software Foundation//DTD Tiles Configuration 3.0//EN"
         <put-attribute name="title" value="Dat ve xe" />
         <put-attribute name="content" value="/WEB-INF/jsp/route-details.jsp" />
     </definition>
+    
+    <definition name="sole-ticket" extends="baseLayout">
+        <put-attribute name="title" value="Dat ve" />
+        <put-attribute name="content" value="/WEB-INF/jsp/sole-ticket.jsp" />
+    </definition>
 </tiles-definitions>

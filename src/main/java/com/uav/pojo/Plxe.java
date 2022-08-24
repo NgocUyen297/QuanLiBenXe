@@ -5,7 +5,7 @@
 package com.uav.pojo;
 
 import java.io.Serializable;
-import java.util.Set;
+import java.util.Collection;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -56,7 +56,7 @@ public class Plxe implements Serializable {
     @Column(name = "HangXe")
     private String hangXe;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "loaixeID")
-    private Set<Buses> busesSet;
+    private Collection<Buses> busesCollection;
 
     public Plxe() {
     }
@@ -105,12 +105,12 @@ public class Plxe implements Serializable {
     }
 
     @XmlTransient
-    public Set<Buses> getBusesSet() {
-        return busesSet;
+    public Collection<Buses> getBusesCollection() {
+        return busesCollection;
     }
 
-    public void setBusesSet(Set<Buses> busesSet) {
-        this.busesSet = busesSet;
+    public void setBusesCollection(Collection<Buses> busesCollection) {
+        this.busesCollection = busesCollection;
     }
 
     @Override

@@ -5,7 +5,7 @@
 package com.uav.pojo;
 
 import java.io.Serializable;
-import java.util.Set;
+import java.util.Collection;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -48,13 +48,13 @@ public class Province implements Serializable {
     @Column(name = "_code")
     private String code;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "destination")
-    private Set<Route> routeSet;
+    private Collection<Route> routeCollection;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "startingpoint")
-    private Set<Route> routeSet1;
+    private Collection<Route> routeCollection1;
     @OneToMany(mappedBy = "provinceId")
-    private Set<District> districtSet;
+    private Collection<District> districtCollection;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idProvince")
-    private Set<Tram> tramSet;
+    private Collection<Tram> tramCollection;
 
     public Province() {
     }
@@ -88,39 +88,39 @@ public class Province implements Serializable {
     }
 
     @XmlTransient
-    public Set<Route> getRouteSet() {
-        return routeSet;
+    public Collection<Route> getRouteCollection() {
+        return routeCollection;
     }
 
-    public void setRouteSet(Set<Route> routeSet) {
-        this.routeSet = routeSet;
-    }
-
-    @XmlTransient
-    public Set<Route> getRouteSet1() {
-        return routeSet1;
-    }
-
-    public void setRouteSet1(Set<Route> routeSet1) {
-        this.routeSet1 = routeSet1;
+    public void setRouteCollection(Collection<Route> routeCollection) {
+        this.routeCollection = routeCollection;
     }
 
     @XmlTransient
-    public Set<District> getDistrictSet() {
-        return districtSet;
+    public Collection<Route> getRouteCollection1() {
+        return routeCollection1;
     }
 
-    public void setDistrictSet(Set<District> districtSet) {
-        this.districtSet = districtSet;
+    public void setRouteCollection1(Collection<Route> routeCollection1) {
+        this.routeCollection1 = routeCollection1;
     }
 
     @XmlTransient
-    public Set<Tram> getTramSet() {
-        return tramSet;
+    public Collection<District> getDistrictCollection() {
+        return districtCollection;
     }
 
-    public void setTramSet(Set<Tram> tramSet) {
-        this.tramSet = tramSet;
+    public void setDistrictCollection(Collection<District> districtCollection) {
+        this.districtCollection = districtCollection;
+    }
+
+    @XmlTransient
+    public Collection<Tram> getTramCollection() {
+        return tramCollection;
+    }
+
+    public void setTramCollection(Collection<Tram> tramCollection) {
+        this.tramCollection = tramCollection;
     }
 
     @Override

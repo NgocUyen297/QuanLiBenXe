@@ -25,11 +25,11 @@
                 <div class="card">
                     <img class="card-img-top" class = "img-fluid" src="${route.image}" alt="Card image">
                     <div class="card-body">
-                        <h5 class="card-title">Ngày đi:${routeBus.ngaydi} </h5>
-                        <p class="card-title">Giờ đi: ${routeBus.giodi}</p>
-                        <p class="card-title">Xe số: ${routeBus.getBusesId().getBId()}</p>
-                        <p class="card-title">Số ghế còn lại: ${routeBus.getBusesId().getLoaixeID().getSoGhe() }</p>
-                        <a href="#" class="btn btn-primary">Đặt vé</a>
+                       <h5 class="card-title">Ngày đi:${routeBus.ngaydi} </h5>
+                        <p class="card-title">Giờ đi:${routeBus.giodi} </p>               
+                        <p class="card-title">Xe số: ${routeBus.getBusesId().getBid()}</p>
+                        <p class="card-title">Số ghế còn lại: ${routeBus.getBusesId().getLoaixeID().getSoGhe()}</p>
+                        <a href="<c:url value="/route/${route.rid}/${routeBus.rbid}"/>" class="btn btn-primary">Đặt vé</a>
                     </div>
                 </div>
             </div>
