@@ -19,7 +19,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author pc
+ * @author HP
  */
 @Entity
 @Table(name = "routestation")

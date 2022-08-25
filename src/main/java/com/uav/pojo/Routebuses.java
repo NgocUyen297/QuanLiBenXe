@@ -4,7 +4,6 @@
  */
 package com.uav.pojo;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -23,7 +22,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author pc
+ * @author HP
  */
 @Entity
 @Table(name = "routebuses")
@@ -56,14 +55,12 @@ public class Routebuses implements Serializable {
     @NotNull
     @Column(name = "price")
     private int price;
-    @JoinColumn(name = "buses_id", referencedColumnName = "bid")
-    @ManyToOne(optional = false)
-    @JsonIgnore
-    private Buses busesId;
     @JoinColumn(name = "route_id", referencedColumnName = "rid")
     @ManyToOne(optional = false)
-    @JsonIgnore
     private Route routeId;
+    @JoinColumn(name = "buses_id", referencedColumnName = "bid")
+    @ManyToOne(optional = false)
+    private Buses busesId;
 
     public Routebuses() {
     }
@@ -111,20 +108,20 @@ public class Routebuses implements Serializable {
         this.price = price;
     }
 
-    public Buses getBusesId() {
-        return busesId;
-    }
-
-    public void setBusesId(Buses busesId) {
-        this.busesId = busesId;
-    }
-
     public Route getRouteId() {
         return routeId;
     }
 
     public void setRouteId(Route routeId) {
         this.routeId = routeId;
+    }
+
+    public Buses getBusesId() {
+        return busesId;
+    }
+
+    public void setBusesId(Buses busesId) {
+        this.busesId = busesId;
     }
 
     @Override

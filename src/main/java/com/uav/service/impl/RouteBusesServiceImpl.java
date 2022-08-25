@@ -42,4 +42,14 @@ public class RouteBusesServiceImpl implements RouteBusesService {
         return this.routebusesRepository.addRBuses(p);
     }
 
+    @Override
+    public Routebuses getRoutebusesById(int RoutebusesId) {
+        return this.routebusesRepository.getRoutebusesById(RoutebusesId);
+    }
+
+    @Override
+    public List<Routebuses> getRoutebusesByRouteId(int RoutefId) {
+        return this.routebusesRepository.getRoutebusesByRouteId(RoutefId);
+    }
+
 }

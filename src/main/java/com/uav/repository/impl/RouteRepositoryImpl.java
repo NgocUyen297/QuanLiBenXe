@@ -119,5 +119,12 @@ public class RouteRepositoryImpl implements RouteRepository {
             return false;
         }
     }
+    
+    
+    @Override
+    public Route getRouteById(int routeId) {
+        Session session = this.sessionFactory.getObject().getCurrentSession();
+        return session.get(Route.class, routeId);
+    }
 
 }

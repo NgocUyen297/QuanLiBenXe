@@ -126,5 +126,28 @@ public class RouteBusesRepositoryImpl  implements RouteBusesRepository{
             ex.printStackTrace();
             return false;
         }    }
+    
+    
+       @Override
+    public Routebuses getRoutebusesById(int RoutebusesId) {
+        Session session = this.sessionFactory.getObject().getCurrentSession();
+        
+        return session.get(Routebuses.class, RoutebusesId);
+    }
+    @Override
+    public List<Routebuses> getRoutebusesByRouteId(int RouteId) {
+        Session session = this.sessionFactory.getObject().getCurrentSession();
+        CriteriaBuilder builder = session.getCriteriaBuilder();
+        CriteriaQuery<Routebuses> q = builder.createQuery(Routebuses.class);
+        Root root = q.from(Routebuses.class);
+        
+//        q.select(root);
+        q.where(builder.equal(root.get("routeId"),RouteId));
+        
+        
+        Query query = session.createQuery(q);
+        
+        return query.getResultList();
+    }
 
 }

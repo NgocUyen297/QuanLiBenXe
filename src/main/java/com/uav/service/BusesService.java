@@ -13,9 +13,9 @@ import java.util.Map;
  * @author pc
  */
 public interface BusesService {
-     List<Buses> getBuses(Map<String, String> params, int page);
-
+    List<Buses> getBuses(Map<String, String> params, int page);
     int countBuses();
     boolean deleteBuses(int id);
     boolean addBuses(Buses p);
+    Buses getBusById(int busId);
 }

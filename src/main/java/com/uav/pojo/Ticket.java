@@ -15,7 +15,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -23,7 +22,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author pc
+ * @author HP
  */
 @Entity
 @Table(name = "ticket")
@@ -34,8 +33,9 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Ticket.findByUsername", query = "SELECT t FROM Ticket t WHERE t.username = :username"),
     @NamedQuery(name = "Ticket.findByAmount", query = "SELECT t FROM Ticket t WHERE t.amount = :amount"),
     @NamedQuery(name = "Ticket.findByTotal", query = "SELECT t FROM Ticket t WHERE t.total = :total"),
-    @NamedQuery(name = "Ticket.findBySeats", query = "SELECT t FROM Ticket t WHERE t.seats = :seats"),
-    @NamedQuery(name = "Ticket.findByTstatusPay", query = "SELECT t FROM Ticket t WHERE t.tstatusPay = :tstatusPay")})
+    @NamedQuery(name = "Ticket.findByTstatusPay", query = "SELECT t FROM Ticket t WHERE t.tstatusPay = :tstatusPay"),
+    @NamedQuery(name = "Ticket.findByPickupStationId", query = "SELECT t FROM Ticket t WHERE t.pickupStationId = :pickupStationId"),
+    @NamedQuery(name = "Ticket.findByArriveStationId", query = "SELECT t FROM Ticket t WHERE t.arriveStationId = :arriveStationId")})
 public class Ticket implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -44,46 +44,29 @@ public class Ticket implements Serializable {
     @Basic(optional = false)
     @Column(name = "tid")
     private Integer tid;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 50)
+    @Size(max = 50)
     @Column(name = "username")
     private String username;
-    @Basic(optional = false)
-    @NotNull
     @Column(name = "amount")
-    private int amount;
-    @Basic(optional = false)
-    @NotNull
+    private Integer amount;
     @Column(name = "total")
-    private int total;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 3)
-    @Column(name = "seats")
-    private String seats;
-    @Basic(optional = false)
-    @NotNull
+    private Integer total;
     @Column(name = "TstatusPay")
-    private short tstatusPay;
-    @JoinColumn(name = "busesId", referencedColumnName = "bid")
-    @ManyToOne(optional = false)
-    private Buses busesId;
-    @JoinColumn(name = "pupDistrict", referencedColumnName = "id")
-    @OneToOne(optional = false)
-    private District pupDistrict;
-    @JoinColumn(name = "dDistrict", referencedColumnName = "id")
-    @OneToOne(optional = false)
-    private District dDistrict;
+    private Short tstatusPay;
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "pickupStationId")
+    private int pickupStationId;
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "arriveStationId")
+    private int arriveStationId;
     @JoinColumn(name = "userId", referencedColumnName = "userid")
-    @ManyToOne(optional = false)
+    @ManyToOne
     private Users userId;
-    @JoinColumn(name = "pupWard", referencedColumnName = "id")
-    @OneToOne(optional = false)
-    private Ward pupWard;
-    @JoinColumn(name = "dWard", referencedColumnName = "id")
-    @OneToOne(optional = false)
-    private Ward dWard;
+    @JoinColumn(name = "busesId", referencedColumnName = "bid")
+    @ManyToOne
+    private Buses busesId;
 
     public Ticket() {
     }
@@ -92,13 +75,10 @@ public class Ticket implements Serializable {
         this.tid = tid;
     }
 
-    public Ticket(Integer tid, String username, int amount, int total, String seats, short tstatusPay) {
+    public Ticket(Integer tid, int pickupStationId, int arriveStationId) {
         this.tid = tid;
-        this.username = username;
-        this.amount = amount;
-        this.total = total;
-        this.seats = seats;
-        this.tstatusPay = tstatusPay;
+        this.pickupStationId = pickupStationId;
+        this.arriveStationId = arriveStationId;
     }
 
     public Integer getTid() {
@@ -117,60 +97,44 @@ public class Ticket implements Serializable {
         this.username = username;
     }
 
-    public int getAmount() {
+    public Integer getAmount() {
         return amount;
     }
 
-    public void setAmount(int amount) {
+    public void setAmount(Integer amount) {
         this.amount = amount;
     }
 
-    public int getTotal() {
+    public Integer getTotal() {
         return total;
     }
 
-    public void setTotal(int total) {
+    public void setTotal(Integer total) {
         this.total = total;
     }
 
-    public String getSeats() {
-        return seats;
-    }
-
-    public void setSeats(String seats) {
-        this.seats = seats;
-    }
-
-    public short getTstatusPay() {
+    public Short getTstatusPay() {
         return tstatusPay;
     }
 
-    public void setTstatusPay(short tstatusPay) {
+    public void setTstatusPay(Short tstatusPay) {
         this.tstatusPay = tstatusPay;
     }
 
-    public Buses getBusesId() {
-        return busesId;
+    public int getPickupStationId() {
+        return pickupStationId;
     }
 
-    public void setBusesId(Buses busesId) {
-        this.busesId = busesId;
+    public void setPickupStationId(int pickupStationId) {
+        this.pickupStationId = pickupStationId;
     }
 
-    public District getPupDistrict() {
-        return pupDistrict;
+    public int getArriveStationId() {
+        return arriveStationId;
     }
 
-    public void setPupDistrict(District pupDistrict) {
-        this.pupDistrict = pupDistrict;
-    }
-
-    public District getDDistrict() {
-        return dDistrict;
-    }
-
-    public void setDDistrict(District dDistrict) {
-        this.dDistrict = dDistrict;
+    public void setArriveStationId(int arriveStationId) {
+        this.arriveStationId = arriveStationId;
     }
 
     public Users getUserId() {
@@ -181,20 +145,12 @@ public class Ticket implements Serializable {
         this.userId = userId;
     }
 
-    public Ward getPupWard() {
-        return pupWard;
+    public Buses getBusesId() {
+        return busesId;
     }
 
-    public void setPupWard(Ward pupWard) {
-        this.pupWard = pupWard;
-    }
-
-    public Ward getDWard() {
-        return dWard;
-    }
-
-    public void setDWard(Ward dWard) {
-        this.dWard = dWard;
+    public void setBusesId(Buses busesId) {
+        this.busesId = busesId;
     }
 
     @Override

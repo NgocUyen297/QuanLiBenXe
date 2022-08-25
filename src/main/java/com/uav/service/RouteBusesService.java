@@ -13,8 +13,10 @@ import java.util.Map;
  * @author pc
  */
 public interface RouteBusesService {
-     List<Routebuses> getRouteBuses(Map<String, String> params, int page);
-     int countRBuses();
+    List<Routebuses> getRouteBuses(Map<String, String> params, int page);
+    int countRBuses();
     boolean deleteRBuses(int id);
     boolean addRBuses(Routebuses p);
+    Routebuses getRoutebusesById (int RoutebusesId);
+    List<Routebuses> getRoutebusesByRouteId (int RoutefId);
 }

@@ -4,16 +4,12 @@
  */
 package com.uav.pojo;
 
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import java.io.Serializable;
 import java.util.Collection;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -26,11 +22,10 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author pc
+ * @author HP
  */
 @Entity
 @Table(name = "plxe")
-
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Plxe.findAll", query = "SELECT p FROM Plxe p"),
@@ -60,7 +55,7 @@ public class Plxe implements Serializable {
     @Size(min = 1, max = 225)
     @Column(name = "HangXe")
     private String hangXe;
-    @OneToMany( cascade = CascadeType.ALL, mappedBy = "loaixeID")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "loaixeID")
     private Collection<Buses> busesCollection;
 
     public Plxe() {

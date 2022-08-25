@@ -14,10 +14,12 @@ import java.util.Map;
  */
 public interface RouteService {
     List<Route> getRoutes(Map<String, String> params, int page);
-    
+
     long countRoute();
 
     boolean deleteRoute(int id);
 
     boolean addRoute(Route p);
+    
+    Route getRouteById (int routeId);
 }

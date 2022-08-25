@@ -4,7 +4,6 @@
  */
 package com.uav.pojo;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.Date;
@@ -30,7 +29,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author pc
+ * @author HP
  */
 @Entity
 @Table(name = "route")
@@ -65,18 +64,14 @@ public class Route implements Serializable {
     @Column(name = "image")
     private String image;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "routeId")
-    @JsonIgnore
     private Collection<Routestation> routestationCollection;
     @JoinColumn(name = "destination", referencedColumnName = "id")
     @ManyToOne(optional = false)
-    @JsonIgnore
     private Province destination;
     @JoinColumn(name = "startingpoint", referencedColumnName = "id")
     @ManyToOne(optional = false)
-    @JsonIgnore
     private Province startingpoint;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "routeId")
-    @JsonIgnore
     private Collection<Routebuses> routebusesCollection;
 
     public Route() {

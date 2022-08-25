@@ -21,4 +21,6 @@ public interface RouteRepository {
     boolean deleteRoute(int id);
 
     boolean addRoute(Route p);
+    
+    Route getRouteById (int routeId);
 }

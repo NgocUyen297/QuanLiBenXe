@@ -18,7 +18,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -26,7 +25,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author pc
+ * @author HP
  */
 @Entity
 @Table(name = "district")
@@ -50,10 +49,6 @@ public class District implements Serializable {
     @Size(max = 20)
     @Column(name = "_prefix")
     private String prefix;
-    @OneToOne(cascade = CascadeType.ALL, mappedBy = "pupDistrict")
-    private Ticket ticket;
-    @OneToOne(cascade = CascadeType.ALL, mappedBy = "dDistrict")
-    private Ticket ticket1;
     @JoinColumn(name = "_province_id", referencedColumnName = "id")
     @ManyToOne
     private Province provinceId;
@@ -91,22 +86,6 @@ public class District implements Serializable {
 
     public void setPrefix(String prefix) {
         this.prefix = prefix;
-    }
-
-    public Ticket getTicket() {
-        return ticket;
-    }
-
-    public void setTicket(Ticket ticket) {
-        this.ticket = ticket;
-    }
-
-    public Ticket getTicket1() {
-        return ticket1;
-    }
-
-    public void setTicket1(Ticket ticket1) {
-        this.ticket1 = ticket1;
     }
 
     public Province getProvinceId() {

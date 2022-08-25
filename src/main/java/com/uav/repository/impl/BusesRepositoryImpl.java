@@ -106,6 +106,12 @@ public class BusesRepositoryImpl implements BusesRepository {
     
     }
 
+    @Override
+    public Buses getBusById(int busId) {
+        Session session = this.sessionFactory.getObject().getCurrentSession();
+        return session.get(Buses.class, busId);
+    }
+
 
 
 }

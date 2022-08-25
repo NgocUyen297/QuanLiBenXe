@@ -17,4 +17,6 @@ public interface RouteBusesRepository {
     int countRBuses();
     boolean deleteRBuses(int id);
     boolean addRBuses(Routebuses p);
+    Routebuses getRoutebusesById (int RoutebusesId);
+    List<Routebuses> getRoutebusesByRouteId (int RoutefId);
 }

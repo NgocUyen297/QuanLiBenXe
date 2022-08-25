@@ -6,7 +6,6 @@ package com.uav.service.impl;
 
 import com.uav.pojo.Buses;
 import com.uav.repository.BusesRepository;
-import com.uav.repository.RouteRepository;
 import com.uav.service.BusesService;
 import java.util.List;
 import java.util.Map;
@@ -44,6 +43,11 @@ public class BusesServiceImpl implements BusesService {
         buses.setImage("https://res.cloudinary.com/dfkf0cjct/image/upload/v1641994146/a0otbfzs3rinppqwxsau.jpg");
         return this.busesRepository.addBuses(buses);
 
+    }
+
+    @Override
+    public Buses getBusById(int busId) {
+        return this.busesRepository.getBusById(busId);
     }
 
 }
