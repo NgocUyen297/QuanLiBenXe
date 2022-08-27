@@ -53,14 +53,10 @@ public class Route implements Serializable {
     @Size(min = 1, max = 50)
     @Column(name = "routename")
     private String routename;
-    @Basic(optional = false)
-    @NotNull
     @Column(name = "createdatetime")
     @Temporal(TemporalType.TIMESTAMP)
     private Date createdatetime;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 500)
+    @Size(max = 500)
     @Column(name = "image")
     private String image;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "routeId")
@@ -81,11 +77,9 @@ public class Route implements Serializable {
         this.rid = rid;
     }
 
-    public Route(Integer rid, String routename, Date createdatetime, String image) {
+    public Route(Integer rid, String routename) {
         this.rid = rid;
         this.routename = routename;
-        this.createdatetime = createdatetime;
-        this.image = image;
     }
 
     public Integer getRid() {

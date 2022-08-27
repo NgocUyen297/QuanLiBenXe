@@ -20,6 +20,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -47,6 +48,10 @@ import javax.xml.bind.annotation.XmlTransient;
 public class Users implements Serializable {
 
     private static final long serialVersionUID = 1L;
+    
+    public static final String ADMIN = "ROLE_ADMIN";
+    public static final String USER = "ROLE_USER";
+    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
@@ -72,20 +77,14 @@ public class Users implements Serializable {
     @Size(min = 1, max = 50)
     @Column(name = "lastname")
     private String lastname;
-    @Basic(optional = false)
-    @NotNull
     @Column(name = "yearofbirth")
-    @Temporal(TemporalType.DATE)
+    @Temporal(TemporalType.TIMESTAMP)
     private Date yearofbirth;
-    @Basic(optional = false)
-    @NotNull
     @Column(name = "created_at")
     @Temporal(TemporalType.TIMESTAMP)
     private Date createdAt;
     // @Pattern(regexp="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?", message="Invalid email")//if the field contains email address consider using this annotation to enforce field validation
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 50)
+    @Size(max = 50)
     @Column(name = "email")
     private String email;
     @Basic(optional = false)
@@ -93,16 +92,18 @@ public class Users implements Serializable {
     @Size(min = 1, max = 50)
     @Column(name = "Rode")
     private String rode;
-    @Basic(optional = false)
-    @NotNull
+    @Size(max = 20)
     @Column(name = "SDT")
-    private int sdt;
+    private String sdt;
     @OneToMany(mappedBy = "userId")
     private Collection<Ticket> ticketCollection;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "driverID")
-    private Collection<Buses> busesCollection;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "staffconfirm")
     private Collection<Busesstatus> busesstatusCollection;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "userid")
+    private Collection<Comment> commentCollection;
+    
+    @Transient
+    private String confirmPassword;
 
     public Users() {
     }
@@ -111,17 +112,13 @@ public class Users implements Serializable {
         this.userid = userid;
     }
 
-    public Users(Integer userid, String username, String pass, String firstname, String lastname, Date yearofbirth, Date createdAt, String email, String rode, int sdt) {
+    public Users(Integer userid, String username, String pass, String firstname, String lastname, String rode) {
         this.userid = userid;
         this.username = username;
         this.pass = pass;
         this.firstname = firstname;
         this.lastname = lastname;
-        this.yearofbirth = yearofbirth;
-        this.createdAt = createdAt;
-        this.email = email;
         this.rode = rode;
-        this.sdt = sdt;
     }
 
     public Integer getUserid() {
@@ -196,11 +193,11 @@ public class Users implements Serializable {
         this.rode = rode;
     }
 
-    public int getSdt() {
+    public String getSdt() {
         return sdt;
     }
 
-    public void setSdt(int sdt) {
+    public void setSdt(String sdt) {
         this.sdt = sdt;
     }
 
@@ -214,21 +211,21 @@ public class Users implements Serializable {
     }
 
     @XmlTransient
-    public Collection<Buses> getBusesCollection() {
-        return busesCollection;
-    }
-
-    public void setBusesCollection(Collection<Buses> busesCollection) {
-        this.busesCollection = busesCollection;
-    }
-
-    @XmlTransient
     public Collection<Busesstatus> getBusesstatusCollection() {
         return busesstatusCollection;
     }
 
     public void setBusesstatusCollection(Collection<Busesstatus> busesstatusCollection) {
         this.busesstatusCollection = busesstatusCollection;
+    }
+
+    @XmlTransient
+    public Collection<Comment> getCommentCollection() {
+        return commentCollection;
+    }
+
+    public void setCommentCollection(Collection<Comment> commentCollection) {
+        this.commentCollection = commentCollection;
     }
 
     @Override
@@ -254,6 +251,20 @@ public class Users implements Serializable {
     @Override
     public String toString() {
         return "com.uav.pojo.Users[ userid=" + userid + " ]";
+    }
+
+    /**
+     * @return the confirmPassword
+     */
+    public String getConfirmPassword() {
+        return confirmPassword;
+    }
+
+    /**
+     * @param confirmPassword the confirmPassword to set
+     */
+    public void setConfirmPassword(String confirmPassword) {
+        this.confirmPassword = confirmPassword;
     }
     
 }

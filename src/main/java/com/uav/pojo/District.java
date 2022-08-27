@@ -49,11 +49,11 @@ public class District implements Serializable {
     @Size(max = 20)
     @Column(name = "_prefix")
     private String prefix;
+    @OneToMany(mappedBy = "districtId")
+    private Collection<Ward> wardCollection;
     @JoinColumn(name = "_province_id", referencedColumnName = "id")
     @ManyToOne
     private Province provinceId;
-    @OneToMany(mappedBy = "districtId")
-    private Collection<Ward> wardCollection;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "districtid")
     private Collection<Tram> tramCollection;
 
@@ -88,14 +88,6 @@ public class District implements Serializable {
         this.prefix = prefix;
     }
 
-    public Province getProvinceId() {
-        return provinceId;
-    }
-
-    public void setProvinceId(Province provinceId) {
-        this.provinceId = provinceId;
-    }
-
     @XmlTransient
     public Collection<Ward> getWardCollection() {
         return wardCollection;
@@ -103,6 +95,14 @@ public class District implements Serializable {
 
     public void setWardCollection(Collection<Ward> wardCollection) {
         this.wardCollection = wardCollection;
+    }
+
+    public Province getProvinceId() {
+        return provinceId;
+    }
+
+    public void setProvinceId(Province provinceId) {
+        this.provinceId = provinceId;
     }
 
     @XmlTransient

@@ -16,7 +16,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
-import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -45,13 +44,17 @@ public class Ticket implements Serializable {
     @Basic(optional = false)
     @Column(name = "tid")
     private Integer tid;
-    @Size(max = 50)
+    @Size(max = 45)
     @Column(name = "username")
     private String username;
+    @Basic(optional = false)
+    @NotNull
     @Column(name = "amount")
-    private Integer amount;
+    private int amount;
+    @Basic(optional = false)
+    @NotNull
     @Column(name = "total")
-    private Integer total;
+    private int total;
     @Column(name = "TstatusPay")
     private Short tstatusPay;
     @Basic(optional = false)
@@ -62,15 +65,12 @@ public class Ticket implements Serializable {
     @NotNull
     @Column(name = "arriveStationId")
     private int arriveStationId;
-    
     @JoinColumn(name = "userId", referencedColumnName = "userid")
     @ManyToOne
     private Users userId;
-    
     @JoinColumn(name = "busesId", referencedColumnName = "bid")
-    @ManyToOne
+    @ManyToOne(optional = false)
     private Buses busesId;
-    
 
     public Ticket() {
     }
@@ -79,8 +79,10 @@ public class Ticket implements Serializable {
         this.tid = tid;
     }
 
-    public Ticket(Integer tid, int pickupStationId, int arriveStationId) {
+    public Ticket(Integer tid, int amount, int total, int pickupStationId, int arriveStationId) {
         this.tid = tid;
+        this.amount = amount;
+        this.total = total;
         this.pickupStationId = pickupStationId;
         this.arriveStationId = arriveStationId;
     }
@@ -101,19 +103,19 @@ public class Ticket implements Serializable {
         this.username = username;
     }
 
-    public Integer getAmount() {
+    public int getAmount() {
         return amount;
     }
 
-    public void setAmount(Integer amount) {
+    public void setAmount(int amount) {
         this.amount = amount;
     }
 
-    public Integer getTotal() {
+    public int getTotal() {
         return total;
     }
 
-    public void setTotal(Integer total) {
+    public void setTotal(int total) {
         this.total = total;
     }
 

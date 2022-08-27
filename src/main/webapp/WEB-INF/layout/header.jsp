@@ -16,16 +16,24 @@
         <div class="collapse navbar-collapse" id="mynavbar">
             <ul class="navbar-nav me-auto">
                 <li class="nav-item">
-                    <a class="nav-link" href="javascript:void(0)">&#128653; Trang chủ</a>
+                    <a class="nav-link" href="<c:url value="/"/>">&#128653; Trang chủ</a>
                 </li>
                 <li>
-                    <a class="nav-link" href="javascript:void(0)">Đăng kí</a>
+                    <a class="nav-link" href="<c:url value="/register"/>">Đăng kí</a>
                 </li>
+                <c:if test="${pageContext.request.userPrincipal.name == null}">
                 <li>
-                    <a class="nav-link" href="javascript:void(0)">Đăng nhập</a>
+                    <a class="nav-link" href="<c:url value="/login"/>">Đăng nhập</a>
                 </li>
+                </c:if>
+                
+                <c:if test="${pageContext.request.userPrincipal.name != null}">
                 <li>
-                    <a class="nav-link" href="javascript:void(0)">Đăng xuất</a>
+                    <a class="nav-link" href="<c:url value="/"/>">${pageContext.request.userPrincipal.name}</a>
+                </li>
+                </c:if>
+                <li>
+                    <a class="nav-link" href="<c:url value="/logout"/>">Đăng xuất</a>
                 </li>
 
             </ul>

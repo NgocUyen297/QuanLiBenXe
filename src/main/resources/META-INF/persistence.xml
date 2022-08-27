@@ -28,6 +28,7 @@
     <class>com.uav.config.Routestation</class>
     <class>com.uav.config.Ticket</class>
     <class>com.uav.pojo.TicketTram</class>
+    <class>com.uav.pojo.Comment</class>
     <exclude-unlisted-classes>false</exclude-unlisted-classes>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/qlbenxe?zeroDateTimeBehavior=CONVERT_TO_NULL"/>

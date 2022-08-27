@@ -35,6 +35,7 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Buses.findAll", query = "SELECT b FROM Buses b"),
     @NamedQuery(name = "Buses.findByBid", query = "SELECT b FROM Buses b WHERE b.bid = :bid"),
     @NamedQuery(name = "Buses.findByBusesName", query = "SELECT b FROM Buses b WHERE b.busesName = :busesName"),
+    @NamedQuery(name = "Buses.findByDriverID", query = "SELECT b FROM Buses b WHERE b.driverID = :driverID"),
     @NamedQuery(name = "Buses.findByBstatus", query = "SELECT b FROM Buses b WHERE b.bstatus = :bstatus"),
     @NamedQuery(name = "Buses.findByImage", query = "SELECT b FROM Buses b WHERE b.image = :image")})
 public class Buses implements Serializable {
@@ -52,23 +53,26 @@ public class Buses implements Serializable {
     private String busesName;
     @Basic(optional = false)
     @NotNull
+    @Column(name = "driverID")
+    private int driverID;
+    @Basic(optional = false)
+    @NotNull
     @Column(name = "Bstatus")
     private boolean bstatus;
     @Size(max = 500)
     @Column(name = "image")
     private String image;
-    @OneToMany(mappedBy = "busesId")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "busesId")
     private Collection<Ticket> ticketCollection;
-    @JoinColumn(name = "driverID", referencedColumnName = "userid")
-    @ManyToOne(optional = false)
-    private Users driverID;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "busesId")
+    private Collection<Busesstatus> busesstatusCollection;
     @JoinColumn(name = "loaixeID", referencedColumnName = "lid")
     @ManyToOne(optional = false)
     private Plxe loaixeID;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "busesId")
     private Collection<Routebuses> routebusesCollection;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "busesId")
-    private Collection<Busesstatus> busesstatusCollection;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "bid")
+    private Collection<Comment> commentCollection;
 
     public Buses() {
     }
@@ -77,9 +81,10 @@ public class Buses implements Serializable {
         this.bid = bid;
     }
 
-    public Buses(Integer bid, String busesName, boolean bstatus) {
+    public Buses(Integer bid, String busesName, int driverID, boolean bstatus) {
         this.bid = bid;
         this.busesName = busesName;
+        this.driverID = driverID;
         this.bstatus = bstatus;
     }
 
@@ -97,6 +102,14 @@ public class Buses implements Serializable {
 
     public void setBusesName(String busesName) {
         this.busesName = busesName;
+    }
+
+    public int getDriverID() {
+        return driverID;
+    }
+
+    public void setDriverID(int driverID) {
+        this.driverID = driverID;
     }
 
     public boolean getBstatus() {
@@ -124,12 +137,13 @@ public class Buses implements Serializable {
         this.ticketCollection = ticketCollection;
     }
 
-    public Users getDriverID() {
-        return driverID;
+    @XmlTransient
+    public Collection<Busesstatus> getBusesstatusCollection() {
+        return busesstatusCollection;
     }
 
-    public void setDriverID(Users driverID) {
-        this.driverID = driverID;
+    public void setBusesstatusCollection(Collection<Busesstatus> busesstatusCollection) {
+        this.busesstatusCollection = busesstatusCollection;
     }
 
     public Plxe getLoaixeID() {
@@ -150,12 +164,12 @@ public class Buses implements Serializable {
     }
 
     @XmlTransient
-    public Collection<Busesstatus> getBusesstatusCollection() {
-        return busesstatusCollection;
+    public Collection<Comment> getCommentCollection() {
+        return commentCollection;
     }
 
-    public void setBusesstatusCollection(Collection<Busesstatus> busesstatusCollection) {
-        this.busesstatusCollection = busesstatusCollection;
+    public void setCommentCollection(Collection<Comment> commentCollection) {
+        this.commentCollection = commentCollection;
     }
 
     @Override

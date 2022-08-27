@@ -32,7 +32,8 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Routebuses.findByRbid", query = "SELECT r FROM Routebuses r WHERE r.rbid = :rbid"),
     @NamedQuery(name = "Routebuses.findByNgaydi", query = "SELECT r FROM Routebuses r WHERE r.ngaydi = :ngaydi"),
     @NamedQuery(name = "Routebuses.findByGiodi", query = "SELECT r FROM Routebuses r WHERE r.giodi = :giodi"),
-    @NamedQuery(name = "Routebuses.findByPrice", query = "SELECT r FROM Routebuses r WHERE r.price = :price")})
+    @NamedQuery(name = "Routebuses.findByPrice", query = "SELECT r FROM Routebuses r WHERE r.price = :price"),
+    @NamedQuery(name = "Routebuses.findBySoghe", query = "SELECT r FROM Routebuses r WHERE r.soghe = :soghe")})
 public class Routebuses implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -55,6 +56,8 @@ public class Routebuses implements Serializable {
     @NotNull
     @Column(name = "price")
     private int price;
+    @Column(name = "soghe")
+    private Integer soghe;
     @JoinColumn(name = "route_id", referencedColumnName = "rid")
     @ManyToOne(optional = false)
     private Route routeId;
@@ -106,6 +109,14 @@ public class Routebuses implements Serializable {
 
     public void setPrice(int price) {
         this.price = price;
+    }
+
+    public Integer getSoghe() {
+        return soghe;
+    }
+
+    public void setSoghe(Integer soghe) {
+        this.soghe = soghe;
     }
 
     public Route getRouteId() {
